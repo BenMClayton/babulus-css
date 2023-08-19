@@ -1,0 +1,88 @@
+//Colours
+
+//Individual
+$incrementCount: 20;
+$mainColours: (
+    red: rgb(255,0,0),
+    orange: rgb(255, 128, 0), 
+    yellow: rgb(255, 255, 0), 
+    lime: rgb(0,255,0), 
+    green: rgb(0,128,0),
+    cyan: rgb(0,255,255), 
+    blue: rgb(0,0,255), 
+    magenta: rgb(255,0,255), 
+    purple: rgb(128,0,128), 
+    pink: rgb(192,0,192), 
+    brown: rgb(165,42,42), 
+    grey: rgb(128,128,128)
+);
+
+@function darkenColour($colour, $range){
+}
+
+@each $colorKey, $colourValue in $mainColours{
+    .bg {
+        //PURE COLOURS
+        &-#{$colorKey} {
+            background-color: $colourValue;
+
+            // Transition from white to main color
+            @for $i from 1 through ($incrementCount / 2) {
+                $range: (100% / ($incrementCount / 2)) * (($incrementCount / 2) - $i);
+                &-#{$i} {
+                    background-color: mix(white, $colourValue, $range);
+                }
+            }
+
+            // Transition from main color to black
+            @for $i from 1 through ($incrementCount / 2) {
+                $range: (100% / ($incrementCount / 2)) * (($incrementCount / 2) - $i);
+                &-#{$i+10} {
+                    background-color: mix($colourValue, black, $range);
+                }
+            }
+
+            
+	    // @for $i from 1 through $incrementCount {
+        //         $greyColor: mix($colourValue, black, (100% / ($incrementCount)) * (($incrementCount) - $i));
+
+        //         @each $colorKey2, $colourValue2 in $mainColours{
+        //             @for $i2 from 1 through $incrementCount {
+        //                 $range: (100% / $incrementCount) * ($incrementCount - $i2);
+        //                 &-#{$colorKey2}-#{$i}-#{$i2}{
+        //                     $mainColoursMixed: mix($colourValue, $colourValue2, $range);
+    
+        //                     //TODO: mix 1st colour with 2nd, then mix with grey to get shades
+        //                     background-color: mix($greyColor, $mainColoursMixed);
+        //                 }s
+        //             }
+        //        }
+        //   }
+        } 
+    }
+}
+
+
+
+
+//Blended Colours
+// $wantedColours: (
+//     "red": rgb(255,0,0),
+//     "green": rgb(0,255,0),
+//     "blue": rgb(0,0,255)
+// );
+// // $wantedColoursLabels: red, yellow, green, blue, purple, pink, brown, white, black, grey;
+// // $wantedColours: rgb(255,0,0), rgb(), yellow, green, blue, purple, pink;
+// $range: 20;
+
+// @each $colour-keys, $colour-values  in $wantedColours {
+//     .bg-#{$colour-keys} {
+//         background-color: $colour-values;
+//     }
+
+//     @each $iteration in $range{
+        
+//     }
+// }
+
+//Combined

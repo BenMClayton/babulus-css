@@ -41,48 +41,5 @@ $mainColours: (
                     background-color: mix($colourValue, black, $range);
                 }
             }
-
-            
-	    // @for $i from 1 through $incrementCount {
-        //         $greyColor: mix($colourValue, black, (100% / ($incrementCount)) * (($incrementCount) - $i));
-
-        //         @each $colorKey2, $colourValue2 in $mainColours{
-        //             @for $i2 from 1 through $incrementCount {
-        //                 $range: (100% / $incrementCount) * ($incrementCount - $i2);
-        //                 &-#{$colorKey2}-#{$i}-#{$i2}{
-        //                     $mainColoursMixed: mix($colourValue, $colourValue2, $range);
-    
-        //                     //TODO: mix 1st colour with 2nd, then mix with grey to get shades
-        //                     background-color: mix($greyColor, $mainColoursMixed);
-        //                 }s
-        //             }
-        //        }
-        //   }
-        } 
     }
 }
-
-
-
-
-//Blended Colours
-// $wantedColours: (
-//     "red": rgb(255,0,0),
-//     "green": rgb(0,255,0),
-//     "blue": rgb(0,0,255)
-// );
-// // $wantedColoursLabels: red, yellow, green, blue, purple, pink, brown, white, black, grey;
-// // $wantedColours: rgb(255,0,0), rgb(), yellow, green, blue, purple, pink;
-// $range: 20;
-
-// @each $colour-keys, $colour-values  in $wantedColours {
-//     .bg-#{$colour-keys} {
-//         background-color: $colour-values;
-//     }
-
-//     @each $iteration in $range{
-        
-//     }
-// }
-
-//Combined

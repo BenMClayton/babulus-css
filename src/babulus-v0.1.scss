@@ -1,45 +1,38 @@
-//Colours
+@use "sass:color";
 
-//Individual
-$incrementCount: 20;
-$mainColours: (
-    red: rgb(255,0,0),
-    orange: rgb(255, 128, 0), 
-    yellow: rgb(255, 255, 0), 
-    lime: rgb(0,255,0), 
-    green: rgb(0,128,0),
-    cyan: rgb(0,255,255), 
-    blue: rgb(0,0,255), 
-    magenta: rgb(255,0,255), 
-    purple: rgb(128,0,128), 
-    pink: rgb(192,0,192), 
-    brown: rgb(165,42,42), 
-    grey: rgb(128,128,128)
+// A compact background-colour utility palette.
+$shade-steps: 10;
+$main-colours: (
+  "red": rgb(255, 0, 0),
+  "orange": rgb(255, 128, 0),
+  "yellow": rgb(255, 255, 0),
+  "lime": rgb(0, 255, 0),
+  "green": rgb(0, 128, 0),
+  "cyan": rgb(0, 255, 255),
+  "blue": rgb(0, 0, 255),
+  "magenta": rgb(255, 0, 255),
+  "purple": rgb(128, 0, 128),
+  "pink": rgb(192, 0, 192),
+  "brown": rgb(165, 42, 42),
+  "grey": rgb(128, 128, 128)
 );
 
-@function darkenColour($colour, $range){
-}
+@each $colour-name, $colour-value in $main-colours {
+  .bg-#{$colour-name} {
+    background-color: $colour-value;
 
-@each $colorKey, $colourValue in $mainColours{
-    .bg {
-        //PURE COLOURS
-        &-#{$colorKey} {
-            background-color: $colourValue;
-
-            // Transition from white to main color
-            @for $i from 1 through ($incrementCount / 2) {
-                $range: (100% / ($incrementCount / 2)) * (($incrementCount / 2) - $i);
-                &-#{$i} {
-                    background-color: mix(white, $colourValue, $range);
-                }
-            }
-
-            // Transition from main color to black
-            @for $i from 1 through ($incrementCount / 2) {
-                $range: (100% / ($incrementCount / 2)) * (($incrementCount / 2) - $i);
-                &-#{$i+10} {
-                    background-color: mix($colourValue, black, $range);
-                }
-            }
+    // 1 is the lightest tint; 10 is the base colour.
+    @for $step from 1 through $shade-steps {
+      &-#{$step} {
+        background-color: color.mix(white, $colour-value, ($shade-steps - $step) * 10%);
+      }
     }
+
+    // 11 starts the shade range; 20 is black.
+    @for $step from 1 through $shade-steps {
+      &-#{$step + $shade-steps} {
+        background-color: color.mix(black, $colour-value, $step * 10%);
+      }
+    }
+  }
 }

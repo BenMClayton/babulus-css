@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Babulus CSS palette</title>
+    <link rel="stylesheet" href="../src/babulus-v0.1.css">
+    <style>
+      :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+      body { margin: 0; padding: 2rem; background: #111827; color: #f9fafb; }
+      main { width: min(72rem, 100%); margin: auto; }
+      h1 { margin-bottom: .25rem; }
+      p { color: #cbd5e1; }
+      .palette { display: grid; grid-template-columns: repeat(21, 1fr); margin: 1rem 0; }
+      .swatch { min-height: 2.5rem; }
+      .label { margin-top: 1.5rem; font-weight: 700; text-transform: capitalize; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Babulus CSS</h1>
+      <p>Twelve background colours, each with a 20-step tint and shade scale.</p>
+      <div id="palettes"></div>
+    </main>
+    <script>
+      const colours = ['red', 'orange', 'yellow', 'lime', 'green', 'cyan', 'blue', 'magenta', 'purple', 'pink', 'brown', 'grey'];
+      const root = document.querySelector('#palettes');
+      colours.forEach((colour) => {
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = colour;
+        const palette = document.createElement('div');
+        palette.className = 'palette';
+        for (let step = 1; step <= 20; step += 1) {
+          const swatch = document.createElement('div');
+          swatch.className = `swatch bg-${colour}-${step}`;
+          swatch.title = `.bg-${colour}-${step}`;
+          palette.appendChild(swatch);
+        }
+        const base = document.createElement('div');
+        base.className = `swatch bg-${colour}`;
+        base.title = `.bg-${colour}`;
+        palette.insertBefore(base, palette.children[10]);
+        root.append(label, palette);
+      });
+    </script>
+  </body>
+</html>
